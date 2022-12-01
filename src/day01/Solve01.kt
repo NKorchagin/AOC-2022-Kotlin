@@ -1,49 +1,35 @@
 package day01
 
 import readInput
+import readInputGroups
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 @ExperimentalTime
 fun main() {
-    val ageToDeliver = 6
-    val ageToDeliverFirstBaby = 8
-
-    fun handleDay(ages: Map<Int, Long>): Map<Int, Long> {
-        val ages = ages.toMutableMap()
-        val fishesDelivering = ages[0] ?: 0
-        for (age in 0 until ageToDeliverFirstBaby) {
-            ages[age] = ages.getOrDefault(age + 1, 0)// shift pregnant by 1 day
-        }
-        ages[ageToDeliverFirstBaby] = fishesDelivering // new fish babies
-        ages[ageToDeliver] = ages[ageToDeliver]?.plus(fishesDelivering) ?: 0 // moms + `ageToDeliver` days of pregnancy
-        return ages
-    }
-
-    fun amountOfFish(ages: List<Int>, days: Int): Long {
-        var agesDict = ages.groupingBy { it }.eachCount().mapValues { it.value.toLong() }
-        repeat(days) {
-            agesDict = handleDay(agesDict)
-        }
-        return agesDict.values.sum()
-    }
-
-    fun solve(fileName: String, days: Int): Long {
-        val input = readInput(fileName)
-        val fishAges = input.first().split(',').map { it.toInt() }
-        return amountOfFish(fishAges, days)
-    }
 
     fun solveA(fileName: String): Long {
-        return solve(fileName, 80)
+        val input = readInputGroups(fileName)
+        val elvesCalories = input.map { calories ->
+            calories.sumOf { it.toInt() }
+        }
+        return elvesCalories
+            .max().toLong()
     }
 
     fun solveB(fileName: String): Long {
-        return solve(fileName, 256)
+        val input = readInputGroups(fileName)
+        val elvesCalories = input.map { calories ->
+            calories.sumOf { it.toInt() }
+        }
+        return elvesCalories
+            .sortedDescending()
+            .take(3)
+            .sum().toLong()
     }
 
-    check(solveA("day01/Example") == 5934L)
-    check(solveB("day01/Example") == 26984457539L)
+    check(solveA("day01/Example") == 24000L)
+    check(solveB("day01/Example") == 45000L)
 
     val input = "day01/Input.ignore"
     val (part1, time1) = measureTimedValue { solveA(input) }
