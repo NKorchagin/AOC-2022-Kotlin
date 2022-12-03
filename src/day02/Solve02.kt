@@ -72,27 +72,25 @@ fun main() {
     println("Part2: $part2 takes: ${time2.inWholeMilliseconds}ms")
 
     // Alternative solution
-    fun solveA_math(fileName: String): Long {
-        val input = readInput(fileName)
-        return input
+    fun solveAMath(fileName: String): Long {
+        return readInput(fileName)
             .map { it[0] - 'A' to it[2] - 'X' }
             .sumOf { it.second + 1 + listOf(3, 6, 0)[(it.second - it.first + 3) % 3] }
             .toLong()
     }
 
-    fun solveB_math(fileName: String): Long {
-        val input = readInput(fileName)
-        return input
+    fun solveBMath(fileName: String): Long {
+        return readInput(fileName)
             .map { it[0] - 'A' to it[2] - 'X' }
             .sumOf { it.second * 3 + (it.first + it.second + 2) % 3 + 1 }
             .toLong()
     }
 
-    check(solveA_math("day02/Example") == 15L)
-    check(solveB_math("day02/Example") == 12L)
+    check(solveAMath("day02/Example") == 15L)
+    check(solveBMath("day02/Example") == 12L)
 
-    val (part1Math, time1Math) = measureTimedValue { solveA_math(input) }
+    val (part1Math, time1Math) = measureTimedValue { solveAMath(input) }
     println("Part1_math: $part1Math takes: ${time1Math.inWholeMilliseconds}ms")
-    val (part2Math, time2Math) = measureTimedValue { solveA_math(input) }
+    val (part2Math, time2Math) = measureTimedValue { solveAMath(input) }
     println("Part2_math: $part2Math takes: ${time2Math.inWholeMilliseconds}ms")
 }
