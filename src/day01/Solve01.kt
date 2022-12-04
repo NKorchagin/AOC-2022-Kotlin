@@ -1,7 +1,6 @@
 package day01
 
-import readInput
-import readInputGroups
+import utils.*
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 

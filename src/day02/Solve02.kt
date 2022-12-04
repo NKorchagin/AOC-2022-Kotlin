@@ -1,6 +1,6 @@
 package day02
 
-import readInput
+import utils.*
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 import day02.RPS.*
