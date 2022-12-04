@@ -7,7 +7,12 @@ import kotlin.time.measureTimedValue
 @ExperimentalTime
 fun main() {
 
-    fun Char.priority(): Int = code - if (isUpperCase()) 38 else 96
+    fun Char.priority(): Int =
+        if (isUpperCase()) {
+            this - 'A' + 27 // Uppercase item types 'A' through 'Z' have priorities 27 through 52.
+        } else {
+            this - 'a' + 1 // Lowercase item types 'a' through 'z' have priorities 1 through 26.
+        }
 
     fun findShareItem(line: String): Char {
         val firstCompartment = line.take(line.length / 2).toSet()
