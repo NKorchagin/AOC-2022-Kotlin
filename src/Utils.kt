@@ -25,3 +25,9 @@ fun readInputGroups(name: String) = File("src", "$name")
 fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
     .toString(16)
     .padStart(32, '0')
+
+fun IntRange.inside(range: IntRange) = first in range && last in range
+fun IntRange.overlaps(range: IntRange) = first in range || last in range
+
+fun String.splitToPair(delimiter: String) = split(delimiter).let { it.first() to it.last() }
+
