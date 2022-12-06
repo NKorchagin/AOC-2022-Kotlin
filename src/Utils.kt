@@ -12,6 +12,7 @@ fun readInput(name: String) = File("src", "$name")
 
 fun readInputText(name: String) = File("src", "$name")
     .readText()
+    .dropLastWhile { it == '\n' }
 
 fun readInputGroups(name: String) = File("src", "$name")
     .readText()
